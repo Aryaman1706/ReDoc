@@ -2,9 +2,12 @@
   "name": "docEditor",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -19,10 +22,17 @@
   "homepage": "https://github.com/Aryaman1706/docEditor#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
     "joi": "^14.3.1",
     "json-web-token": "^3.2.0",
     "moment": "^2.25.1",
     "mongoose": "^5.9.11",
-    "socket.io": "^2.3.0"
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3"
   }
 }

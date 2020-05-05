@@ -16,7 +16,7 @@ const docSchema = new mongoose.Schema({
     },
     editdate:{
         type: Date,
-        default: moment.format('lll')
+        default: moment().format('lll')
     }
 });
 

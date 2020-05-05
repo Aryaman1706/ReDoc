@@ -1,17 +1,58 @@
+const express = require('express');
 const mongoose=require('mongoose');
 const Joi=require('joi');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
+
 const { Doc } = require('../models/docs');
 
-const auth=require('../middleware/auth');
+// const auth=require('../middleware/auth');
 
 const router=express.Router();
 
-// get my docs
-router.get('/myDocs', auth, async(req,res)=>{
+router.use(fileUpload());
+
+// list all my docs
+router.get('/myDocs', async(req,res)=>{
     res.json(req.user.docs);
 });
 
-// Create a doc
-router.post('/', auth, async(req,res)=>{
-    
+// get a specific doc
+router.get('/:id', async(req,res)=>{
+    const doc = Doc.findById(req.params.id);
+    res.json(doc);
 });
+
+// Create a new doc ---NOT WORKING---
+router.post('/upload', async(req,res)=>{
+
+  if (req.files === null) {
+      return res.status(400).json({ msg: 'No file uploaded' });
+    }
+    const file = req.files.file;
+    var uploadedFileName = uuidv4() + path.extname(file.name);
+  
+    file.mv(`${__dirname}/client/public/uploads/${uploadedFileName}`, err => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+    });
+
+    let doc = new Doc ({
+      title: req.body.title,
+      authors: req.user._id,
+      docBody: `/uploads/${uploadedFileName}`
+    });
+    doc = await doc.save();
+
+    res.json(doc);
+});
+// ---END---
+
+
+
+
+module.exports=router;
