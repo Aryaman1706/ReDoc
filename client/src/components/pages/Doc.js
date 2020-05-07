@@ -5,9 +5,9 @@ const Doc = () => {
     const docContext = useContext(DocContext);
     const{ editDoc, loadDoc } = docContext;
 
-    useEffect({
-        loadDoc();
-    },[]);
+    // useEffect({
+    //     loadDoc();
+    // },[]);
         
     const { currentDocText, currentTitle } = localStorage.getItem('current');
     const [ docText, setdocText ] = useState(currentDocText);

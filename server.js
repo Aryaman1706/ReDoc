@@ -11,6 +11,10 @@ const { User } = require('./models/users');
 // importing routes
 const user = require('./routes/user');
 const doc = require('./routes/doc');
+const auth = require('./routes/auth');
+
+// importing auth middleware
+const authM = require('./middleware/auth');
 
 const app=express();
 
@@ -21,6 +25,7 @@ app.use(fileUpload());
 // ROUTES
 app.use('/api/doc',doc);
 app.use('/api/user',user);
+app.use('/api/auth',auth);
 
 // upload a new doc
 app.post('/api/upload', async(req,res)=>{

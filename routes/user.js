@@ -4,12 +4,12 @@ mongoose.set('useFindAndModify', false);
 const { User } = require('../models/users');
 const { Doc } = require('../models/docs');
 
-// const auth = require('../middleware/auth');
+const auth = require('../middleware/auth');
 
 const router=express.Router();
 
 // get my profile
-router.get('/me',async(req,res)=>{
+router.get('/me', auth, async(req,res)=>{
     const user= await User.findById(req.user._id);
     if(!user) res.status(404).json("user not found");
     res.json(user);
@@ -28,7 +28,7 @@ router.post('/', async (req,res)=>{
 });
 
 // edit my profile
-router.put('/me', async (req,res)=>{
+router.put('/me', auth, async (req,res)=>{
     const user = User.findByIdAndUpdate(req.user._id, {
         name: req.body.name,
         email: req.body.email
@@ -38,7 +38,7 @@ router.put('/me', async (req,res)=>{
 });
 
 // delete account
-router.delete('/me', async(req,res)=>{
+router.delete('/me', auth, async(req,res)=>{
     const user = User.findByIdAndRemove(req.user._id);
     res.json(user);
 });
