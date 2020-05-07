@@ -7,14 +7,14 @@ const docSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    docBody:{
+    body:{
         type: String
     },
     authors:{
         type: Array,
         default: []
     },
-    editdate:{
+    date:{
         type: Date,
         default: moment().format('lll')
     }

@@ -18,7 +18,7 @@ const Add = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', title);
-          const res = await axios.post('/upload', formData, {
+          const res = await axios.post('/api/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -51,7 +51,7 @@ const Add = () => {
 
                 <input 
                 type='submit' 
-                className='btn'
+                className='btn blue'
                 />
 
               </form>

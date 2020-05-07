@@ -19,10 +19,18 @@ router.get('/myDocs', async(req,res)=>{
     res.json(req.user.docs);
 });
 
-// get a specific doc
-router.get('/:id', async(req,res)=>{
-    const doc = Doc.findById(req.params.id);
-    res.json(doc);
+// get a specific doc body
+router.get('/body/:id', async(req,res)=>{
+    const doc = await Doc.findById(req.params.id);
+    fs.readFile(path.join(__dirname, '../client/public', doc.body) , 'utf8', function(err,data){
+      res.send(data);
+    });
+});
+
+// get the title of a specific doc
+router.get('/title/:id',async(req,res)=>{
+  const doc = await Doc.findById(req.params.id);
+  res.send(doc.title);
 });
 
 // Create a new doc ---NOT WORKING---
@@ -44,7 +52,7 @@ router.post('/upload', async(req,res)=>{
     let doc = new Doc ({
       title: req.body.title,
       authors: req.user._id,
-      docBody: `/uploads/${uploadedFileName}`
+      body: `/uploads/${uploadedFileName}`
     });
     doc = await doc.save();
 

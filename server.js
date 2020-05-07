@@ -23,7 +23,7 @@ app.use('/api/doc',doc);
 app.use('/api/user',user);
 
 // upload a new doc
-app.post('/upload', async(req,res)=>{
+app.post('/api/upload', async(req,res)=>{
 
     if (req.files === null) {
         return res.status(400).json({ msg: 'No file uploaded' });
@@ -41,7 +41,7 @@ app.post('/upload', async(req,res)=>{
       let doc = new Doc ({
         title: req.body.title,
         // authors: req.user._id,
-        docBody: `/uploads/${uploadedFileName}`
+        body: `/uploads/${uploadedFileName}`
       });
       doc = await doc.save();
 
