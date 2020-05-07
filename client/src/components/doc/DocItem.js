@@ -3,7 +3,7 @@ import React from 'react'
 const DocItem = (props) => {
     const { title, date } = props.doc
     const onClick = () => {
-        localStorage.setItem('current',props.doc);
+        localStorage.setItem('current',JSON.stringify(props.doc));
     };
 
     return (

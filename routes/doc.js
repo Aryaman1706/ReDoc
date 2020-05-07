@@ -35,11 +35,11 @@ router.get('/title/:id', auth, async(req,res)=>{
 // edit specific doc
 router.put('/:id', auth, async (req,res)=>{
   let doc = await Doc.findByIdAndUpdate(req.params.id,{
-    title: req.body.title
+    title: req.body.docTitle
   },{ new: true });
 
-  if(req.body.text){ 
-    fs.writeFile(path.join(__dirname, '../client/public', doc.body), req.body.text);
+  if(req.body.docText){ 
+    fs.writeFile(path.join(__dirname, '../client/public', doc.body), req.body.docText);
   };
  
   doc = await doc.save();

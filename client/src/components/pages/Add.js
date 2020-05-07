@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Add = () => {
+const Add = (props) => {
     const [file, setFile] = useState('');
     const [title, setTitle] = useState('');
 
@@ -14,15 +14,18 @@ const Add = () => {
       };
     
       const onSubmit = async e => {
+        if(file && title){
+          props.history.push('/');
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('title', title);
+            const res = await axios.post('/api/upload', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+        };
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('title', title);
-          const res = await axios.post('/api/upload', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
       };
 
     return (
@@ -49,10 +52,12 @@ const Add = () => {
                   />
                 </div>
 
+                <div className='center'>
                 <input 
                 type='submit' 
                 className='btn blue'
                 />
+                </div>
 
               </form>
           </div>
