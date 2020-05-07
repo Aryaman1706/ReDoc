@@ -58,6 +58,31 @@ router.post('/upload', async(req,res)=>{
 
     res.json(doc);
 });
+
+// edit specific doc
+router.put('/:id', async (req,res)=>{
+  let doc = await Doc.findByIdAndUpdate(req.params.id,{
+    title: req.body.title
+  },{ new: true });
+
+  fs.writeFile(path.join(__dirname, '../client/public', doc.body), req.body.text);
+  
+  doc = await doc.save();
+  
+  res.send(doc);
+});
+
+// delete a particular doc
+router.delete('/:id', async(req,res)=>{
+  const doc = await Doc.findByIdAndRemove(req.params.id);
+  fs.unlink(path.join(__dirname, '../client/public', doc.body), (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  });
+})
+
 // ---END---
 
 

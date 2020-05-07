@@ -8,7 +8,7 @@ const Doc = () => {
     useEffect({
         loadDoc();
     },[]);
-
+        
     const { currentDocText, currentTitle } = localStorage.getItem('current');
     const [ docText, setdocText ] = useState(currentDocText);
     const [ title, setTitle ] = useState(currentTitle);
