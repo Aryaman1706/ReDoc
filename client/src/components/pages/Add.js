@@ -7,11 +7,7 @@ const Add = (props) => {
 
   const authContext = useContext(AuthContext);
   const { loadUser } = authContext;
-  useEffect(()=>{
-    loadUser();
-    console.log("add page");
-  },[ localStorage.getItem('token') ]);
-
+  
     const [file, setFile] = useState('');
     const [title, setTitle] = useState('');
 

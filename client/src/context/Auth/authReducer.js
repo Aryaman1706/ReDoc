@@ -35,6 +35,14 @@ export default (state, action) => {
                 docs: action.payload.docs
             };
         
+        // update user
+        case UPDATE_USER:
+            return {
+                ...state,
+                ...action.payload,
+                isAuthenticated: true
+            };
+        
         // logout user
         case LOGOUT_USER:
             localStorage.removeItem('token');

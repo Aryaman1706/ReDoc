@@ -76,6 +76,23 @@ const AuthState = (props) => {
         })
     };
 
+    // update user
+    const updateUser = async(formData) => {
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const res = axios.put(`/api/user/me`, formData, config);
+
+        dispatch({
+            type: UPDATE_USER,
+            payload: res.data
+        })
+    };
+
     // logout user
     const logoutUser = async () => {
         dispatch({
@@ -94,7 +111,8 @@ const AuthState = (props) => {
                 registerUser,
                 loginUser,
                 loadUser,
-                logoutUser
+                logoutUser,
+                updateUser
             }}
         >
         { props.children }

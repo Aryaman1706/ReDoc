@@ -29,7 +29,7 @@ router.post('/', async (req,res)=>{
 
 // edit my profile
 router.put('/me', auth, async (req,res)=>{
-    const user = User.findByIdAndUpdate(req.user._id, {
+    const user = await User.findByIdAndUpdate(req.user._id, {
         name: req.body.name,
         email: req.body.email
     }, { new: true });
