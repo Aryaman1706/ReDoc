@@ -23,7 +23,7 @@ router.post('/', async (req,res)=>{
         password: req.body.password
     });
 
-    user = user.save();
+    user = await user.save();
     res.json(user);
 });
 

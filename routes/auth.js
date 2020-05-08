@@ -10,7 +10,7 @@ router.post('/', async (req,res)=>{
     if(user.password !== req.body.password)
     return res.send('Not valid...');
     const token = user.generateAuthToken();
-    res.send(token);
+    res.json({token});
 });
 
 module.exports = router;
