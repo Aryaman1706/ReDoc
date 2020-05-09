@@ -7,9 +7,9 @@ const DocItem = (props) => {
     };
 
     return (
-            <div className='col s4' style={{backgroundColor:'black'}}>
-                <h4>title</h4>
-                <p>date</p>
+            <div className='col s4' style={{backgroundColor:'black', margin: '15px'}}>
+                <h4>{title}</h4>
+                <p>{date}</p>
                 <a 
                 href='./doc' 
                 onClick={onClick}

@@ -1,5 +1,6 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const moment = require('moment');
 const fileUpload = require('express-fileupload');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
@@ -51,7 +52,7 @@ app.post('/api/upload',authM, async(req,res)=>{
       doc = await doc.save();
 
       let user = await User.findById(req.user._id);
-      user.docs.push( doc._id );
+      user.docs.push( doc );
       user = await user.save();
       res.json(doc);
 });

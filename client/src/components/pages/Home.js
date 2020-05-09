@@ -1,10 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import DocContext from '../../context/Docs/docContext';
 import AuthContext from '../../context/Auth/authContext';
-import AuthState from '../../context/Auth/AuthState';
 import DocItem from '../doc/DocItem';
-import Navbar from '../layouts/Navbar';
-import Spinner from '../layouts/Spinner';
+import NavbarHome from '../layouts/NavbarHome';
 
 const Home = (props) => {
     
@@ -18,7 +15,7 @@ const Home = (props) => {
 
     return (
             <Fragment>
-            <Navbar/>
+            <NavbarHome/>
             <div className='container'>
                 <div className='row'>
                     { docs.map( doc => 

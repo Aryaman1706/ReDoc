@@ -59,7 +59,7 @@ export default (state, action) => {
         case ADD_DOC:
             return{
                 ...state,
-                docs: [ action.payload._id, ...state.docs ]
+                docs: [ ...state.docs ]
             }
 
         default:

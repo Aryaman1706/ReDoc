@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
-import axios from 'axios';
 import AuthContext from '../../context/Auth/authContext';
 import Navbar from '../layouts/Navbar';
 

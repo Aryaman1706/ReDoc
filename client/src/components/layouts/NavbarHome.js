@@ -25,6 +25,22 @@ const NavbarHome = (props) => {
               <li><a href="./login" onClick={onLogout}>Logout</a></li>
             </ul>
           </div>
+
+          <div className="nav-content container">
+          <div>
+            <form>
+              <div className="input-field">
+                <input
+                  className="white-text" 
+                  name="search" 
+                  type="text" 
+                  placeholder="Search for Documents..." 
+                  required
+                />
+              </div>
+            </form>
+          </div> 
+          </div>
         </nav>   
     )
 }
