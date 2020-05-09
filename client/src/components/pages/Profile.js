@@ -6,10 +6,21 @@ const Profile = (props) => {
 
     const authContext = useContext(AuthContext);
     const { user, updateUser, loadUser } = authContext;
-    
-    // useEffect(()=>{
-    //     loadUser();
-    // },[ localStorage.getItem('token') ]);
+
+    useEffect(()=>{
+        console.log("use effect from profile");
+        if(user){
+            setProfile({
+                name: user.name,
+                email: user.email
+            });
+        } else {
+            setProfile({
+                name: "",
+                email: ""
+            });
+        }
+    },[ authContext ])
 
     const [ profile, setProfile ] = useState({
         name: "",
@@ -34,7 +45,6 @@ const Profile = (props) => {
     return (
         <Fragment>
             <Navbar />
-            { user ?  
                 <div className="valign-wrapper" style={{height:"80%", width: "100%", position:"absolute"}}>
                     <div className="container">
                         <h1 className="center-align">Profile</h1>
@@ -46,22 +56,24 @@ const Profile = (props) => {
                             <input
                                 type="text"
                                 name="name"
+                                placeholder="Name"
                                 required
                                 value={name}
                                 onChange={onChange}
                             />
-                            <label className="active">Name</label>
+                            <label>Name</label>
                             </div>
 
                             <div className="input-field">
                             <input
                                 type="email"
                                 name="email"
+                                placeholder="Email"
                                 required
                                 value={email}
                                 onChange={onChange}
                             />
-                            <label className="active">Email</label>
+                            <label>Email</label>
                             </div>
 
                             <div className="input-field" style={{textAlign: "center", marginBottom:"0px"}}>
@@ -72,9 +84,6 @@ const Profile = (props) => {
                         </form>
                     </div>
                 </div>
-                :
-                null
-            }
         </Fragment>
     )
 }

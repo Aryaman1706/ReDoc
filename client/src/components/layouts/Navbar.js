@@ -17,7 +17,6 @@ const Navbar = (props) => {
   };
 
     return (
-      <AuthState>
         <nav style={{backgroundColor: 'blue'}}>
           <div className="nav-wrapper">
             <a href="./" className="brand-logo">Doc Editor</a>
@@ -28,7 +27,6 @@ const Navbar = (props) => {
             </ul>
           </div>
         </nav>   
-      </AuthState> 
     )
 }
 

@@ -6,7 +6,7 @@ import Navbar from '../layouts/Navbar';
 const Add = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { loadUser } = authContext;
+  const { loadUser, user, addDoc } = authContext;
   
     const [file, setFile] = useState('');
     const [title, setTitle] = useState('');
@@ -17,7 +17,7 @@ const Add = (props) => {
 
       const onChangeTitle = (e) => {
         setTitle(e.target.value);
-      };
+      }; 
     
       const onSubmit = async e => {
         if(file && title){
@@ -25,11 +25,8 @@ const Add = (props) => {
           const formData = new FormData();
           formData.append('file', file);
           formData.append('title', title);
-            const res = await axios.post('/api/upload', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            });
+
+          addDoc(formData);
         };
         e.preventDefault();
       };

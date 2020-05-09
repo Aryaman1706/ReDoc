@@ -9,7 +9,8 @@ import {
     LOGIN_USER,
     LOAD_USER,
     LOGOUT_USER,
-    UPDATE_USER
+    UPDATE_USER,
+    ADD_DOC
 } from '../types';
 
 const AuthState = (props) => {
@@ -66,7 +67,6 @@ const AuthState = (props) => {
 
     // load user
     const loadUser = async () => {
-        console.log("load user");
         setAuthToken(localStorage.getItem('token'));
         const res = await axios.get('/api/user/me');
         
@@ -100,6 +100,20 @@ const AuthState = (props) => {
         });
     };
 
+    // add doc
+    const addDoc = async ( formData ) => {
+        const res = await axios.post('/api/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+
+          dispatch({
+              type: ADD_DOC,
+              payload: res.data
+          })
+    };
+
     // return --->
     return (
         <AuthContext.Provider
@@ -112,7 +126,8 @@ const AuthState = (props) => {
                 loginUser,
                 loadUser,
                 logoutUser,
-                updateUser
+                updateUser,
+                addDoc
             }}
         >
         { props.children }

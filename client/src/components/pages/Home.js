@@ -9,28 +9,24 @@ import Spinner from '../layouts/Spinner';
 const Home = (props) => {
     
     const authContext = useContext(AuthContext);
-    const { loadUser, user, isAuthenticated } = authContext;
+    const { loadUser, user, docs } = authContext;
     
     useEffect(()=>{
         loadUser();
-        console.log("home reload");
+        console.log("use Effect in home");
     },[ localStorage.getItem('token'), props.history ]);
 
     return (
-        <AuthState>
-            {user ?
-                <Fragment>
-                <Navbar/>
-                <div className='container'>
-                    {/* { docs.map( doc => 
-                            <DocItem doc={doc} key={doc._id} />
-                    )} */}
+            <Fragment>
+            <Navbar/>
+            <div className='container'>
+                <div className='row'>
+                    { docs.map( doc => 
+                            <DocItem doc={doc} key={doc} />
+                    )}
                 </div>
-                </Fragment>
-                :
-                <Spinner />
-            }
-        </AuthState>
+            </div>
+            </Fragment>
     )
 }
 

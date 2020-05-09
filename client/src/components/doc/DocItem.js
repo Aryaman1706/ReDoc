@@ -7,18 +7,15 @@ const DocItem = (props) => {
     };
 
     return (
-        <div className='row'>
-            <div className='col s3' style={{backgroundColor:'black'}}>
-                <h4>{title}</h4>
-                <p>{date}</p>
+            <div className='col s4' style={{backgroundColor:'black'}}>
+                <h4>title</h4>
+                <p>date</p>
                 <a 
                 href='./doc' 
-                className='btn blue' 
-                onclick={onClick}
+                onClick={onClick}
                 >
                 Open</a>
             </div>
-        </div>
     )
 }
 

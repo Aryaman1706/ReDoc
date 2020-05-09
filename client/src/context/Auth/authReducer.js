@@ -3,7 +3,8 @@ import {
     LOGIN_USER,
     LOAD_USER,
     LOGOUT_USER,
-    UPDATE_USER
+    UPDATE_USER,
+    ADD_DOC
 } from '../types';
 
 export default (state, action) => {
@@ -53,6 +54,13 @@ export default (state, action) => {
                 user: null,
                 docs: null
             };
+
+        // add doc
+        case ADD_DOC:
+            return{
+                ...state,
+                docs: [ action.payload._id, ...state.docs ]
+            }
 
         default:
             return state;

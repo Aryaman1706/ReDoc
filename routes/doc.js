@@ -4,6 +4,7 @@ const Joi=require('joi');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs');
+const moment = require('moment');
 
 const { Doc } = require('../models/docs');
 
@@ -35,7 +36,8 @@ router.get('/title/:id', auth, async(req,res)=>{
 // edit specific doc
 router.put('/:id', auth, async (req,res)=>{
   let doc = await Doc.findByIdAndUpdate(req.params.id,{
-    title: req.body.docTitle
+    title: req.body.docTitle,
+    date: moment().format('lll')
   },{ new: true });
 
   if(req.body.docText){ 
