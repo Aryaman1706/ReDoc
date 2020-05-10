@@ -10,7 +10,8 @@ import {
     LOAD_USER,
     LOGOUT_USER,
     UPDATE_USER,
-    ADD_DOC
+    ADD_DOC,
+    LOAD_DOCS
 } from '../types';
 
 const AuthState = (props) => {
@@ -19,6 +20,7 @@ const AuthState = (props) => {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
         user: null,
+        docList: [],
         docs: []
     };
     
@@ -114,6 +116,16 @@ const AuthState = (props) => {
           })
     };
 
+    // load docs
+    const loadMyDocs = async () => {
+        state.docList.forEach(
+            async doc  => {
+                let res = await axios.get(`/api/doc/${doc}`);
+                state.docs.push( res.data );
+            }
+        )
+    };
+
     // return --->
     return (
         <AuthContext.Provider
@@ -121,13 +133,15 @@ const AuthState = (props) => {
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 user: state.user,
+                docList: state.docList,
                 docs: state.docs,
                 registerUser,
                 loginUser,
                 loadUser,
                 logoutUser,
                 updateUser,
-                addDoc
+                addDoc,
+                loadMyDocs
             }}
         >
         { props.children }

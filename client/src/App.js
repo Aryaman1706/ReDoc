@@ -11,6 +11,8 @@ import Profile from './components/pages/Profile';
 import AuthState from './context/Auth/AuthState';
 import DocState from './context/Docs/DocState';
 
+import './App.css';
+
 const App = () => {
   return (
     <AuthState>

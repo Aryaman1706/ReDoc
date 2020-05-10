@@ -3,8 +3,7 @@ import AuthContext from '../../context/Auth/authContext';
 
 const NavbarHome = (props) => {
   const authContext = useContext(AuthContext);
-  const { user, logoutUser, loadUser } = authContext;
-
+  const { user, logoutUser, loadUser, loadMyDocs } = authContext;
   useEffect(()=>{
     console.log("use effect in navbar");
     loadUser();

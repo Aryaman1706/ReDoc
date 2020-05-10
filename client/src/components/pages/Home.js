@@ -6,10 +6,11 @@ import NavbarHome from '../layouts/NavbarHome';
 const Home = (props) => {
     
     const authContext = useContext(AuthContext);
-    const { loadUser, user, docs } = authContext;
+    const { loadUser, user, docs, loadMyDocs } = authContext;
     
     useEffect(()=>{
         loadUser();
+        loadMyDocs();
         console.log("use Effect in home");
     },[ localStorage.getItem('token'), props.history ]);
 
@@ -19,7 +20,7 @@ const Home = (props) => {
             <div className='container'>
                 <div className='row'>
                     { docs.map( doc => 
-                            <DocItem doc={doc} key={doc} />
+                            <DocItem doc={doc} key={doc._id} />
                     )}
                 </div>
             </div>

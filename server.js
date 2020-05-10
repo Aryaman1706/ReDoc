@@ -28,7 +28,7 @@ app.use('/api/doc',doc);
 app.use('/api/user',user);
 app.use('/api/auth',auth);
 
-// upload a new doc
+// upload a new doc --->
 app.post('/api/upload',authM, async(req,res)=>{
 
     if (req.files === null) {
@@ -48,14 +48,16 @@ app.post('/api/upload',authM, async(req,res)=>{
         title: req.body.title,
         body: `/uploads/${uploadedFileName}`
       });
-      doc.authors.push(req.user._id);
-      doc = await doc.save();
-
       let user = await User.findById(req.user._id);
-      user.docs.push( doc );
+      user.docs.push( doc._id );
+
+      doc.authors.push(req.user._id);
+
+      doc = await doc.save();
       user = await user.save();
       res.json(doc);
 });
+// --->
 
 mongoose.connect('mongodb://localhost/test')
 .then(()=> console.log('Connected to MongoDB...'))

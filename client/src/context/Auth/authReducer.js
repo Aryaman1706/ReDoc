@@ -4,7 +4,8 @@ import {
     LOAD_USER,
     LOGOUT_USER,
     UPDATE_USER,
-    ADD_DOC
+    ADD_DOC,
+    LOAD_DOCS
 } from '../types';
 
 export default (state, action) => {
@@ -33,7 +34,7 @@ export default (state, action) => {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload,
-                docs: action.payload.docs
+                docList: action.payload.docs
             };
         
         // update user
@@ -52,6 +53,7 @@ export default (state, action) => {
                 isAuthenticated: false,
                 token: null,
                 user: null,
+                docList: null,
                 docs: null
             };
 
@@ -59,8 +61,9 @@ export default (state, action) => {
         case ADD_DOC:
             return{
                 ...state,
-                docs: [ ...state.docs ]
-            }
+                docList: [ action.payload._id, ...state.docList ],
+                docs: [ action.payload, ...state.docs ]
+            };
 
         default:
             return state;

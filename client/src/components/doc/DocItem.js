@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const DocItem = (props) => {
     const { title, date } = props.doc
@@ -7,16 +7,24 @@ const DocItem = (props) => {
     };
 
     return (
-            <div className='col s4' style={{backgroundColor:'black', margin: '15px'}}>
-                <h4>{title}</h4>
-                <p>{date}</p>
+        <div className='col s4'>
+            <div className='card-panel grey'>
+                <h4 className="white-text truncate">{title}</h4>
+                <p className="white-text">{date}</p>
                 <a 
-                href='./doc' 
-                onClick={onClick}
+                    className='white-text btn blue'
+                    href='./doc' 
+                    onClick={onClick}
                 >
                 Open</a>
             </div>
+        </div>
     )
 }
 
 export default DocItem
+{/* <div class="row">
+       <div class="col s4"><div class="card-panel grey">4</div></div>
+       <div class="col s4"><div class="card-panel grey">4</div></div>
+       <div class="col s4"><div class="card-panel grey">4</div></div>
+     </div> */}
