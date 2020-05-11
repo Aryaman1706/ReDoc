@@ -1,28 +1,31 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import AuthContext from '../../context/Auth/authContext';
-import DocItem from '../doc/DocItem';
 import NavbarHome from '../layouts/NavbarHome';
+import Spinner from '../layouts/Spinner';
+import DocContainer from '../doc/DocContainer';
 
 const Home = (props) => {
     
     const authContext = useContext(AuthContext);
-    const { loadUser, user, docs, loadMyDocs } = authContext;
+    const { loadMyDocs, docLoading } = authContext;
     
     useEffect(()=>{
-        loadUser();
+        console.log("use effect in home");
         loadMyDocs();
-        console.log("use Effect in home");
-    },[ localStorage.getItem('token'), props.history ]);
+        localStorage.setItem('current', null);
+    },[])
 
     return (
             <Fragment>
             <NavbarHome/>
-            <div className='container'>
-                <div className='row'>
-                    { docs.map( doc => 
-                            <DocItem doc={doc} key={doc._id} />
-                    )}
-                </div>
+            <div className='container'> 
+                { docLoading === true ?
+                    <Spinner/>
+                    :
+                    <div className='row'>
+                        <DocContainer />
+                    </div>
+                }
             </div>
             </Fragment>
     )

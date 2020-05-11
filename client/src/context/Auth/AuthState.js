@@ -11,8 +11,10 @@ import {
     LOGOUT_USER,
     UPDATE_USER,
     ADD_DOC,
-    LOAD_DOCS
+    LOAD_DOCS,
+    SET_LOADING
 } from '../types';
+import { sign } from 'jsonwebtoken';
 
 const AuthState = (props) => {
     
@@ -21,7 +23,8 @@ const AuthState = (props) => {
         isAuthenticated: null,
         user: null,
         docList: [],
-        docs: []
+        docs: [],
+        docLoading: true
     };
     
     const [ state, dispatch ] = useReducer(authReducer, initialState);
@@ -71,11 +74,10 @@ const AuthState = (props) => {
     const loadUser = async () => {
         setAuthToken(localStorage.getItem('token'));
         const res = await axios.get('/api/user/me');
-        
         dispatch({
             type: LOAD_USER,
             payload: res.data
-        })
+        })  
     };
 
     // update user
@@ -120,10 +122,16 @@ const AuthState = (props) => {
     const loadMyDocs = async () => {
         state.docList.forEach(
             async doc  => {
-                let res = await axios.get(`/api/doc/${doc}`);
-                state.docs.push( res.data );
+                let res =  await axios.get(`/api/doc/${doc}`);
+                dispatch({
+                    type: LOAD_DOCS,
+                    payload: res.data
+                })
             }
         )
+        dispatch({
+            type: SET_LOADING
+        })
     };
 
     // return --->
@@ -135,6 +143,7 @@ const AuthState = (props) => {
                 user: state.user,
                 docList: state.docList,
                 docs: state.docs,
+                docLoading: state.docLoading,
                 registerUser,
                 loginUser,
                 loadUser,

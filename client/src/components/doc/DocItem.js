@@ -23,8 +23,3 @@ const DocItem = (props) => {
 }
 
 export default DocItem
-{/* <div class="row">
-       <div class="col s4"><div class="card-panel grey">4</div></div>
-       <div class="col s4"><div class="card-panel grey">4</div></div>
-       <div class="col s4"><div class="card-panel grey">4</div></div>
-     </div> */}

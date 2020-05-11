@@ -5,7 +5,8 @@ import {
     LOGOUT_USER,
     UPDATE_USER,
     ADD_DOC,
-    LOAD_DOCS
+    LOAD_DOCS,
+    SET_LOADING
 } from '../types';
 
 export default (state, action) => {
@@ -61,10 +62,24 @@ export default (state, action) => {
         case ADD_DOC:
             return{
                 ...state,
-                docList: [ action.payload._id, ...state.docList ],
-                docs: [ action.payload, ...state.docs ]
+                docList: [ action.payload._id, ...state.docList ]
+                // docs: [ action.payload, ...state.docs]
             };
 
+        //load my docs
+        case LOAD_DOCS:
+            return{
+                ...state,
+                docs: [ action.payload, ...state.docs ]
+            }
+
+        // set loading
+        case SET_LOADING:
+            return{
+                ...state,
+                docLoading: false
+            }
+            
         default:
             return state;
     }
