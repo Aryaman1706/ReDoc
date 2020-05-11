@@ -5,8 +5,7 @@ const NavbarHome = (props) => {
   const authContext = useContext(AuthContext);
   const { user, logoutUser, loadUser, loadMyDocs } = authContext;
     useEffect(()=>{
-      console.log("use effect in navbar");
-      // loadUser();
+      loadUser();
       // eslint-disable-next-line
     },[localStorage.getItem('token')]);
 

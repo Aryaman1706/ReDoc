@@ -25,7 +25,7 @@ router.get('/myDocs', auth, async(req,res)=>{
 
 // get a specific doc
 router.get('/:id', auth, async (req, res)=> {
-  const doc = await Doc.findById(req.params.id)
+  const doc = await Doc.findById(req.params.id);
   if( isAuthorized( doc, req.user ) ) {
     res.send(doc);
   } else{
@@ -36,20 +36,10 @@ router.get('/:id', auth, async (req, res)=> {
 // get a specific doc body
 router.get('/body/:id', auth, async(req,res)=>{
   const doc = await Doc.findById(req.params.id);
-  if( isAuthorized (doc, req.user) ) {
+  if( isAuthorized (doc, req.user) ) { 
     fs.readFile(path.join(__dirname, '../client/public', doc.body) , 'utf8', function(err,data){
-      res.send(data);
+      res.json({ text: data, title: doc.title });
     });
-  } else{
-    res.send("You are not authorized");
-  }
-});
-
-// get the title of a specific doc
-router.get('/title/:id', auth, async(req,res)=>{
-  const doc = await Doc.findById(req.params.id);
-  if( isAuthorized (doc, req.user) ) {
-    res.send(doc.title);
   } else{
     res.send("You are not authorized");
   }

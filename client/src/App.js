@@ -16,18 +16,20 @@ import './App.css';
 const App = () => {
   return (
     <AuthState>
-        <Router>
-          <Fragment>
-            <Switch>
-              <Route exact path = '/login' component={Login} />
-              <Route exact path = '/signup' component={Signup} />
-              <PrivateRoute exact path = '/' component={Home} />
-              <Route exact path = '/profile' component={Profile} />
-              <Route exact path = '/add' component={Add} />
-              <PrivateRoute exact path = '/doc' component={Doc} />
-            </Switch>
-          </Fragment>
-        </Router>
+      <DocState>
+          <Router>
+            <Fragment>
+              <Switch>
+                <Route exact path = '/login' component={Login} />
+                <Route exact path = '/signup' component={Signup} />
+                <PrivateRoute exact path = '/' component={Home} />
+                <Route exact path = '/profile' component={Profile} />
+                <Route exact path = '/add' component={Add} />
+                <Route exact path = '/doc' component={Doc} />
+              </Switch>
+            </Fragment>
+          </Router>
+        </DocState>
     </AuthState>
   )
 }

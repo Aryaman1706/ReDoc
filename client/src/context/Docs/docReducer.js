@@ -1,24 +1,18 @@
 import {
-    LOAD_DOC_TITLE,
-    LOAD_DOC_TEXT,
+    LOAD_DOC_BODY,
     EDIT_DOC
 } from '../types';
 
 export default( state, action ) => {
     switch( action.type ) {
         
-        case LOAD_DOC_TITLE:
+        case LOAD_DOC_BODY:
             return{
                 ...state,
-                docTitle: action.payload
+                docBody: action.payload,
+                loadingDocBody: false
             };
-
-        case LOAD_DOC_TEXT:
-            return{
-                ...state,
-                docText: action.payload
-            };
-
+    
         case EDIT_DOC:
             return{
                 ...state
