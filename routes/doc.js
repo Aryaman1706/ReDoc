@@ -50,11 +50,11 @@ router.put('/:id', auth, async (req,res)=>{
   let doc = await Doc.findById(req.params.id);
   if( isAuthorized (doc, req.user) ) {
     doc = await Doc.findByIdAndUpdate(req.params.id,{
-      title: req.body.docTitle,
+      title: req.body.title,
       date: moment().format('lll')
     },{ new: true });
-    if(req.body.docText){ 
-      fs.writeFile(path.join(__dirname, '../client/public', doc.body), req.body.docText);
+    if(req.body.text){ 
+      fs.writeFile(path.join(__dirname, '../client/public', doc.body), req.body.text);
     };
     doc = await doc.save();
     res.send(doc);

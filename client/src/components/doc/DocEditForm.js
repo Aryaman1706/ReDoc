@@ -3,7 +3,7 @@ import DocContext from '../../context/Docs/docContext';
 
 const DocEditForm = () => {
     const docContext = useContext(DocContext);
-    const { loadDocBody, docBody, loadingDocBody } = docContext;
+    const { editDoc, docBody, loadingDocBody } = docContext;
     useEffect(()=>{
         if(!loadingDocBody){
             setDoc({
@@ -24,12 +24,25 @@ const DocEditForm = () => {
     });
 
     const { text, title } = doc;
+
+    const onChange = (e) => {
+        setDoc({
+            ...doc,
+            [ e.target.name ]: e.target.value
+        });
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        editDoc(doc);
+    };
+
     return (
         <div className='container'>
             <div className="row">
                 <form 
                 className="col s12"
-                // onSubmit={onSubmit}
+                onSubmit={onSubmit}
                 >
                     <div className="row">
                         <h5><strong>Title</strong></h5>
@@ -38,17 +51,17 @@ const DocEditForm = () => {
                             name="title" 
                             type="text"
                             value={title}
-                            // onChange={onChangeText}
+                            onChange={onChange}
                             />
                         </div>
                         <h5><strong>Doc Body</strong></h5>
                         <div className="input-field col s12">
                             <textarea 
-                            name="docText" 
-                            className="materialize-textarea"
+                            name="text" 
+                            className="textArea"
                             style={{padding:"0%"}}
                             value={text}
-                            // onChange={onChange}
+                            onChange={onChange}
                             />
                             
                         </div>
