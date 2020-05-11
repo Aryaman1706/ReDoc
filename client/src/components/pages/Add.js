@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import AuthContext from '../../context/Auth/authContext';
 import Navbar from '../layouts/Navbar';
+import Spinner from '../layouts/Spinner';
 
 const Add = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { loadUser, user, addDoc, loadMyDocs, docs } = authContext;
+  const { addDoc } = authContext;
   const [file, setFile] = useState('');
   const [title, setTitle] = useState('');
-
   const onChange = e => {
       setFile(e.target.files[0]);
     };
@@ -34,10 +34,10 @@ const Add = (props) => {
       <Navbar />
       <div className="valign-wrapper" style={{height: "90%", width: "100%", position: "absolute"}}>
         <div className="container">
-        <h3 className='center-align'>Create a New Document...</h3>
+          <h3 className='center-align'>Create a New Document...</h3>
           <br></br>
           <div className='row'>
-          <br></br>
+            <br></br>
               <form onSubmit={onSubmit}>
                 <div className="input-field col s12">
                   <input 
@@ -71,3 +71,5 @@ const Add = (props) => {
 }
 
 export default Add
+
+

@@ -4,11 +4,11 @@ import AuthContext from '../../context/Auth/authContext';
 const NavbarHome = (props) => {
   const authContext = useContext(AuthContext);
   const { user, logoutUser, loadUser, loadMyDocs } = authContext;
-  useEffect(()=>{
-    console.log("use effect in navbar");
-    loadUser();
-    // eslint-disable-next-line
-  },[localStorage.getItem('token')]);
+    useEffect(()=>{
+      console.log("use effect in navbar");
+      // loadUser();
+      // eslint-disable-next-line
+    },[localStorage.getItem('token')]);
 
   const onLogout = async() => {
     logoutUser();

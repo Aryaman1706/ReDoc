@@ -43,4 +43,26 @@ router.delete('/me', auth, async(req,res)=>{
     res.json(user);
 });
 
+// delete the doc id from my docs
+router.put('/editMyDocs/:id', auth, async(req,res)=>{
+    const length = req.user.docs.length;
+    let user = await User.findById(req.user._id);
+    var i;
+    for(i=0; i<length; i++){
+        if(user.docs[i]._id == req.params.id){
+            console.log("match")
+            user.docs.splice(i,1);
+            user = await user.save();
+            res.send(user);
+            break;
+        }
+    }
+    if(i === length){
+        res.send("No such doc id found");
+        console.log("not found")
+    }
+    
+    
+});
+
 module.exports=router;

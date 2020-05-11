@@ -12,7 +12,8 @@ import {
     UPDATE_USER,
     ADD_DOC,
     LOAD_DOCS,
-    SET_LOADING
+    SET_LOADING,
+    REMOVE_DOCLIST
 } from '../types';
 import { sign } from 'jsonwebtoken';
 
@@ -123,16 +124,36 @@ const AuthState = (props) => {
         state.docList.forEach(
             async doc  => {
                 let res =  await axios.get(`/api/doc/${doc}`);
-                dispatch({
-                    type: LOAD_DOCS,
-                    payload: res.data
-                })
+                if(res.data){
+                    dispatch({
+                        type: LOAD_DOCS,
+                        payload: res.data
+                    })
+                } else{
+                    console.log(doc);
+                    removeDoc(doc);
+                }
             }
         )
         dispatch({
             type: SET_LOADING
         })
     };
+
+    // remove doc
+    const removeDoc = async (doc) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const res = await axios.put(`/api/user/editMyDocs/${doc}`, null ,config);
+        console.log(res.data);
+        dispatch({
+            type: REMOVE_DOCLIST
+        })
+    }
 
     // return --->
     return (

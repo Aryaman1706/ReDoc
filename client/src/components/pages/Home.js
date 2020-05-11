@@ -7,11 +7,14 @@ import DocContainer from '../doc/DocContainer';
 const Home = (props) => {
     
     const authContext = useContext(AuthContext);
-    const { loadMyDocs, docLoading } = authContext;
+    const { user, docList, loadMyDocs, docLoading } = authContext;
     
     useEffect(()=>{
         console.log("use effect in home");
-        loadMyDocs();
+        function funct () {
+            loadMyDocs();
+        };
+        funct();
         localStorage.setItem('current', null);
     },[])
 

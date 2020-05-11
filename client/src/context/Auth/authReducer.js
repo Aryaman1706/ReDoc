@@ -6,7 +6,8 @@ import {
     UPDATE_USER,
     ADD_DOC,
     LOAD_DOCS,
-    SET_LOADING
+    SET_LOADING,
+    REMOVE_DOCLIST
 } from '../types';
 
 export default (state, action) => {
@@ -78,6 +79,11 @@ export default (state, action) => {
             return{
                 ...state,
                 docLoading: false
+            }
+            
+        case REMOVE_DOCLIST:
+            return {
+                ...state
             }
             
         default:
