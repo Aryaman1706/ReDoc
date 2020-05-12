@@ -83,7 +83,7 @@ router.delete('/:id', auth, async(req,res)=>{
 });
 
 // add authors
-router.put('/authors/:id', auth, async(req,res)=>{
+router.put('/addAuthor/:id', auth, async(req,res)=>{
   let doc = await Doc.findById (req.params.id);
   if( await isAuthorized (doc, req.user) === true ) {
     let user = await User.findOne({email: req.body.email});
@@ -106,6 +106,45 @@ router.put('/authors/:id', auth, async(req,res)=>{
     res.send("You are not authorized");
   }
 })
+
+// remove author from doc
+router.put( '/removeAuthor/:id', auth, async(req,res)=>{
+  let doc = await Doc.findById ( req.params.id );
+  if( await isAuthorized ( doc, req.user ) === true ) {
+    let user = await User.findOne({email: req.body.email});
+    if(!user){
+      res.send("No user in db");
+      return;
+    };
+
+    const length = doc.authors.length;
+    var i;
+    for(i=0; i<length; i++){
+      if(doc.authors[i].equals(user._id)){
+        doc.authors.splice(i,1);
+        doc = await doc.save();
+        break;
+      };
+    };
+    if ( i === length ) {
+      res.send("no such user found");
+    };
+    
+    const l = user.docs.length;
+    var j;
+    for(j=0; j<l; j++){
+      if(user.docs[j].equals(doc._id)){
+        user.docs.splice(j,1);
+        user = await user.save();
+        break;
+      };
+    };
+    if( j===l ){
+      res.send("no such doc in user");
+    }
+  }
+  res.json(doc);
+});
 
 // ---END---
 module.exports=router;
