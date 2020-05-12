@@ -54,9 +54,8 @@ app.post('/api/upload',authM, async(req,res)=>{
       });
       let user = await User.findById(req.user._id);
       user.docs.push( doc._id );
-
-      doc.authors.push((req.user._id));
-
+    	doc.authors.push(user._id);
+      
       doc = await doc.save();
       user = await user.save();
       res.json(doc);

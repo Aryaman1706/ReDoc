@@ -86,15 +86,15 @@ router.delete('/:id', auth, async(req,res)=>{
 router.put('/authors/:id', auth, async(req,res)=>{
   let doc = await Doc.findById (req.params.id);
   if( await isAuthorized (doc, req.user) === true ) {
-    let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({email: req.body.email});
     if( !user ) {
       res.send("No such user exists");
       return
     };
     if( await alreadyExists(doc, user) === false ){
-      
+
       user.docs.push(doc._id);
-      doc.authors.push( user._id );
+      doc.authors.push(user._id);
       
       doc = await doc.save();
       user = await user.save();
