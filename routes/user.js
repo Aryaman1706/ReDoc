@@ -50,7 +50,6 @@ router.put('/editMyDocs/:id', auth, async(req,res)=>{
     var i;
     for(i=0; i<length; i++){
         if(user.docs[i]._id == req.params.id){
-            console.log("match")
             user.docs.splice(i,1);
             user = await user.save();
             res.send(user);

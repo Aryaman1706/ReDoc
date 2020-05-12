@@ -35,6 +35,10 @@ app.post('/api/upload',authM, async(req,res)=>{
         return res.status(400).json({ msg: 'No file uploaded' });
       }
       const file = req.files.file;
+      if( file.mimetype !== "text/plain" ) {
+        res.send("Invalid file type");
+        return
+      }
       var uploadedFileName = uuidv4() + path.extname(file.name);
     
       file.mv(`${__dirname}/client/public/uploads/${uploadedFileName}`, err => {
@@ -51,7 +55,7 @@ app.post('/api/upload',authM, async(req,res)=>{
       let user = await User.findById(req.user._id);
       user.docs.push( doc._id );
 
-      doc.authors.push(req.user._id);
+      doc.authors.push((req.user._id));
 
       doc = await doc.save();
       user = await user.save();

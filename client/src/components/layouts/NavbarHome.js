@@ -18,7 +18,7 @@ const NavbarHome = (props) => {
     return (
         <nav  className="nav-extended" style={{backgroundColor: 'blue'}}>
           <div className="nav-wrapper">
-            <a href="./" className="brand-logo">Doc Editor</a>
+            <a href="./" className="brand-logo">docEditor</a>
             <ul className="right">
               <li><a href="./profile">Hello {user && user.name}</a></li>
               <li><a href="./add">Add</a></li>
@@ -27,19 +27,19 @@ const NavbarHome = (props) => {
           </div>
 
           <div className="nav-content container">
-          <div>
-            <form>
-              <div className="input-field">
-                <input
-                  className="white-text" 
-                  name="search" 
-                  type="text" 
-                  placeholder="Search for Documents..." 
-                  required
-                />
-              </div>
-            </form>
-          </div> 
+            <div>
+              <form>
+                <div className="input-field">
+                  <input
+                    className="white-text" 
+                    name="search" 
+                    type="text" 
+                    placeholder="Search for Documents..." 
+                    required
+                  />
+                </div>
+              </form>
+            </div> 
           </div>
         </nav>   
     )
