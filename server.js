@@ -71,18 +71,20 @@ app.post('/api/upload',authM, async(req,res)=>{
 
 //socket.io work -->
 io.on('connection', ( socket ) => {
-  
-  console.log("socket io connected...")
+  let id;
+  console.log("socket io connected...",socket.id);
 
   socket.on('join', (doc_id) => {
+    id = doc_id;
     console.log(`room joined ${doc_id}`)
     socket.join(doc_id);
+    
+    socket.on('textChangeServer', ( data ) => {
+      console.log(data);
+      socket.broadcast.to(doc_id).emit('textChangeClient', data);
+    });
   });
-
-  socket.on('textChangeServer', ( data ) => {
-    console.log(data);
-    socket.broadcast.emit('textChangeClient', data);
-  });
+  
 
   socket.on('disconnect', ()=>{
     console.log("socket io disconnected...")

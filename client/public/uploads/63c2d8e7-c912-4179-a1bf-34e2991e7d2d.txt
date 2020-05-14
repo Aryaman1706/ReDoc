@@ -1,9 +1,3 @@
 hello
-hey
-money
-heist
-professor
-hello i am first user
-lkj
-bsdhbc
-ss
+i am the first doc...
+write from here

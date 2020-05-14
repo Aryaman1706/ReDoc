@@ -2,21 +2,23 @@ import React, { useState, useContext, useEffect, Fragment } from 'react';
 import DocContext from '../../context/Docs/docContext';
 import io from 'socket.io-client';;
 
+let socket;
+
 const DocEditForm = () => {
     const docContext = useContext(DocContext);
     const { editDoc, docBody, loadingDocBody, loadDocBody } = docContext;
     const doc_id = JSON.parse(localStorage.getItem('current'))._id;
-
-    let socket;
-    const ENDPOINT = "http://localhost";
-    socket = io(ENDPOINT);
     
+    const ENDPOINT = "http://localhost";
+
     useEffect(()=>{
+        
+        socket = io(ENDPOINT)
+        
+        console.log("use effect of edit");
         
         socket.emit('join', doc_id );
         
-        
-
         if(!loadingDocBody){
             setDoc({
                 text: docBody.text,
@@ -28,19 +30,18 @@ const DocEditForm = () => {
                 title: ""
             });
         }
-        
-       
+
+        socket.on('textChangeClient', ( data ) => {
+            console.log("hey i got data");
+            console.log(data);
+            setDoc({
+                text : data.text,
+                title: data.title
+            })
+        });
+     
     },[])
 
-    socket.on('textChangeClient', ( data ) => {
-        console.log("hey i got data");
-        console.log(data);
-        // setDoc({
-        //     text: data.text,
-        //     title: data.title
-        // })
-    });
-    
     const [ doc,setDoc ] = useState({
         text: "",
         title: ""
