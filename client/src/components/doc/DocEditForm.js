@@ -1,11 +1,22 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 import DocContext from '../../context/Docs/docContext';
-import Spinner from '../layouts/Spinner';
+import io from 'socket.io-client';;
 
 const DocEditForm = () => {
     const docContext = useContext(DocContext);
     const { editDoc, docBody, loadingDocBody, loadDocBody } = docContext;
+    const doc_id = JSON.parse(localStorage.getItem('current'))._id;
+
+    let socket;
+    const ENDPOINT = "http://localhost";
+    socket = io(ENDPOINT);
+    
     useEffect(()=>{
+        
+        socket.emit('join', doc_id );
+        
+        
+
         if(!loadingDocBody){
             setDoc({
                 text: docBody.text,
@@ -17,8 +28,19 @@ const DocEditForm = () => {
                 title: ""
             });
         }
+        
+       
     },[])
 
+    socket.on('textChangeClient', ( data ) => {
+        console.log("hey i got data");
+        console.log(data);
+        // setDoc({
+        //     text: data.text,
+        //     title: data.title
+        // })
+    });
+    
     const [ doc,setDoc ] = useState({
         text: "",
         title: ""
@@ -31,6 +53,7 @@ const DocEditForm = () => {
             ...doc,
             [ e.target.name ]: e.target.value
         });
+        socket.emit( 'textChangeServer', doc );
     };
 
     const onSubmit = (e) => {

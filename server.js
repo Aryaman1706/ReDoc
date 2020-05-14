@@ -19,6 +19,13 @@ const authM = require('./middleware/auth');
 
 const app=express();
 
+// socket.io setup
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+server.listen(80);
+// socket.io setup done
+
 app.use(express.json());
 
 app.use(fileUpload());
@@ -62,6 +69,28 @@ app.post('/api/upload',authM, async(req,res)=>{
 });
 // --->
 
+//socket.io work -->
+io.on('connection', ( socket ) => {
+  
+  console.log("socket io connected...")
+
+  socket.on('join', (doc_id) => {
+    console.log(`room joined ${doc_id}`)
+    socket.join(doc_id);
+  });
+
+  socket.on('textChangeServer', ( data ) => {
+    console.log(data);
+    socket.broadcast.emit('textChangeClient', data);
+  });
+
+  socket.on('disconnect', ()=>{
+    console.log("socket io disconnected...")
+  });
+});
+// socket.io work done -->
+
+// mongoose and port setup-->
 mongoose.connect('mongodb://localhost/test')
 .then(()=> console.log('Connected to MongoDB...'))
 .catch(err=> console.error('Not Connected...'));
