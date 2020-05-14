@@ -93,7 +93,7 @@ io.on('connection', ( socket ) => {
 // socket.io work done -->
 
 // mongoose and port setup-->
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb+srv://aryaman:aryaman@cluster0-gepgv.mongodb.net/test?retryWrites=true&w=majority')
 .then(()=> console.log('Connected to MongoDB...'))
 .catch(err=> console.error('Not Connected...'));
 
