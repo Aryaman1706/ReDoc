@@ -40,7 +40,7 @@ router.get('/body/:id', auth, async(req,res)=>{
   const doc = await Doc.findById(req.params.id);
   if( await isAuthorized (doc, req.user) === true ) { 
     fs.readFile(path.join(__dirname, '../client/public', doc.body) , 'utf8', function(err,data){
-      res.json({ text: data, title: doc.title });
+      res.json({ text: data, title: doc.title, authorsList: doc.authors });
     });
   } else{
     res.send("You are not authorized");
@@ -98,7 +98,7 @@ router.put('/addAuthor/:id', auth, async(req,res)=>{
       
       doc = await doc.save();
       user = await user.save();
-      res.send(doc);
+      res.json({ name: user.name, email: user.email, _id: user._id });
   } else {
     res.send("user already exists");
   }
@@ -116,7 +116,6 @@ router.put( '/removeAuthor/:id', auth, async(req,res)=>{
       res.send("No user in db");
       return;
     };
-
     const length = doc.authors.length;
     var i;
     for(i=0; i<length; i++){
@@ -128,6 +127,7 @@ router.put( '/removeAuthor/:id', auth, async(req,res)=>{
     };
     if ( i === length ) {
       res.send("no such user found");
+      return;
     };
     
     const l = user.docs.length;
@@ -141,7 +141,10 @@ router.put( '/removeAuthor/:id', auth, async(req,res)=>{
     };
     if( j===l ){
       res.send("no such doc in user");
+      return;
     }
+  } else{
+    res.send("you are not authorized");
   }
   res.json(doc);
 });

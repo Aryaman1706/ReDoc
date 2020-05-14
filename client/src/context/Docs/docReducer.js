@@ -1,6 +1,9 @@
 import {
     LOAD_DOC_BODY,
-    EDIT_DOC
+    EDIT_DOC,
+    LOAD_AUTHORS,
+    DELETE_AUTHOR,
+    ADD_AUTHOR
 } from '../types';
 
 export default( state, action ) => {
@@ -10,6 +13,7 @@ export default( state, action ) => {
             return{
                 ...state,
                 docBody: action.payload,
+                authorsList: action.payload.authorsList,
                 loadingDocBody: false
             };
     
@@ -17,6 +21,25 @@ export default( state, action ) => {
             return{
                 ...state
             };
+        
+        case LOAD_AUTHORS:
+            return{
+                ...state,
+                authors: [ action.payload, ...state.authors ],
+                loadingAuthors: false
+            }
+
+        case DELETE_AUTHOR:
+            return{
+                ...state
+            }
+
+        case ADD_AUTHOR:
+            return{
+                ...state,
+                authorsList:[ action.payload._id ,...state.authors ],
+                authors: [ action.payload , ...state.authors ]
+            }
         
         default:
             return state;

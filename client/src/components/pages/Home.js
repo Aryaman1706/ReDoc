@@ -10,11 +10,7 @@ const Home = (props) => {
     const { user, docList, loadMyDocs, docLoading } = authContext;
     
     useEffect(()=>{
-        console.log("use effect in home");
-        function funct () {
-            loadMyDocs();
-        };
-        funct();
+        loadMyDocs();
         localStorage.setItem('current', null);
     },[])
 

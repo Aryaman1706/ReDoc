@@ -15,6 +15,17 @@ router.get('/me', auth, async(req,res)=>{
     res.json(user);
 });
 
+// get a specific user
+router.get('/:id',auth, async (req, res)=>{
+    const user = await User.findById(req.params.id);
+    if( !user ) {
+        res.send("No such user found")
+        return;
+    };
+    console.log(user);
+    res.json({ name: user.name, email: user.email, _id: user._id });
+});
+
 // create new user
 router.post('/', async (req,res)=>{
     let user = new User({
