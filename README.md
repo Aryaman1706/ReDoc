@@ -37,7 +37,7 @@ I tried to make a go-to application for all those people who want to collaborate
 ***
 
 ## Demo Video
-[![Demo Video]()](https://www.youtube.com/watch?v=Zc9EatPEKVo)
+[![Demo Video](images/4.PNG)](https://www.youtube.com/watch?v=Zc9EatPEKVo)
 
 ## My vision for future updates to the application.
 * Make the application more fluid.
