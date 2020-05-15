@@ -153,7 +153,8 @@ const AuthState = (props) => {
         const res = await axios.put(`/api/user/editMyDocs/${doc}`, null ,config);
         console.log(res.data);
         dispatch({
-            type: REMOVE_DOCLIST
+            type: REMOVE_DOCLIST,
+            payload: doc
         })
     }
 
@@ -174,7 +175,8 @@ const AuthState = (props) => {
                 logoutUser,
                 updateUser,
                 addDoc,
-                loadMyDocs
+                loadMyDocs,
+                removeDoc
             }}
         >
         { props.children }

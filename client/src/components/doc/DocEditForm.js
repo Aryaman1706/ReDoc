@@ -40,17 +40,16 @@ const DocEditForm = () => {
             setDoc({
                 text : data.text,
                 title: data.title
-            });
+            })
         });
+
+        
      
     },[])
-
     const [ doc,setDoc ] = useState({
         text: "",
         title: ""
     });
-
-    const [ typing, setTyping ] = useState('');
 
     const { text, title } = doc;
 
@@ -86,7 +85,6 @@ const DocEditForm = () => {
                                 />
                             </div>
                             <h5><strong>Doc Body</strong></h5>
-                            <p className="grey-text">{typing}</p>
                             <div className="input-field col s12">
                                 <textarea 
                                 name="text" 

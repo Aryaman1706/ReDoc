@@ -84,7 +84,10 @@ export default (state, action) => {
             
         case REMOVE_DOCLIST:
             return {
-                ...state
+                ...state,
+                docs: state.docs.filter(
+                    x => x._id !== action.payload
+                )
             }
             
         default:

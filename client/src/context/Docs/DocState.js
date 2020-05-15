@@ -68,7 +68,6 @@ const DocState = (props) => {
     const deleteAuthor = async ( author ) => {
         const id = JSON.parse(localStorage.getItem('current'))._id;
         const email = author.email;
-        console.log(typeof(email));
         const config = {
             headers: {
                 'Content-Type': 'application/json'

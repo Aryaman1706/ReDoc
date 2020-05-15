@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../../context/Auth/authContext';
 
 const DocItem = (props) => {
-    const { title, date } = props.doc
+    const authContext = useContext(AuthContext);
+    const { removeDoc } = authContext;
+    const { title, date, _id } = props.doc
     const onOpen = () => {
         localStorage.setItem('current',JSON.stringify(props.doc));
     };
     const onDelete = () => {
-
+        removeDoc(_id);
     };
 
     return (
@@ -23,8 +26,7 @@ const DocItem = (props) => {
                 <a 
                     className='white-text btn red'
                     style={{marginLeft:"5px"}}
-                    href='#' 
-                    // onClick={onDelete}
+                    onClick={onDelete}
                 >
                 Delete</a>
             </div>

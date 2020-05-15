@@ -31,13 +31,15 @@ export default( state, action ) => {
 
         case DELETE_AUTHOR:
             return{
-                ...state
+                ...state,
+                authors: state.authors.filter(
+                    x => x._id !== action.payload
+                )
             }
 
         case ADD_AUTHOR:
             return{
                 ...state,
-                authorsList:[ action.payload._id ,...state.authors ],
                 authors: [ action.payload , ...state.authors ]
             }
         
