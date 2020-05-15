@@ -29,6 +29,9 @@ I tried to make a go-to application for all those people who want to collaborate
 
 ## Screen Shots of the Application
 ![Doc Preview](images/1.PNG)
+
+***
+
 ![Doc Body](images/2.PNG)
 ## Demo Video
 
