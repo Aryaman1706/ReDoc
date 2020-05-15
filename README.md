@@ -28,7 +28,7 @@ I tried to make a go-to application for all those people who want to collaborate
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - To help with user authentication.
 
 ## Screen Shots of the Application
-
+![Image](https://photos.app.goo.gl/WQB9WHK65T1nUKRz8)
 ## Demo Video
 
 
