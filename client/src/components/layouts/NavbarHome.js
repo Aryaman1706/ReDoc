@@ -18,7 +18,7 @@ const NavbarHome = (props) => {
     return (
         <nav  className="nav-extended" style={{backgroundColor: 'blue'}}>
           <div className="nav-wrapper">
-            <a href="./" className="brand-logo">docEditor</a>
+            <a href="./" className="brand-logo">ReDoc</a>
             <ul className="right">
               <li><a href="./profile">Hello {user && user.name}</a></li>
               <li><a href="./add">Add</a></li>

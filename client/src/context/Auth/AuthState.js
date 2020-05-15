@@ -23,6 +23,7 @@ const AuthState = (props) => {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
         user: null,
+        loading: true,
         docList: [],
         docs: [],
         docLoading: true
@@ -123,7 +124,8 @@ const AuthState = (props) => {
     const loadMyDocs = async () => {
         state.docList.forEach(
             async doc  => {
-                let res =  await axios.get(`/api/doc/${doc}`);
+                
+                let res =  await axios.get(`/api/doc/${doc}`)
                 if(res.data){
                     dispatch({
                         type: LOAD_DOCS,
@@ -162,6 +164,7 @@ const AuthState = (props) => {
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 user: state.user,
+                loading: state.loading,
                 docList: state.docList,
                 docs: state.docs,
                 docLoading: state.docLoading,

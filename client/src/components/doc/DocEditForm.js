@@ -1,12 +1,15 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 import DocContext from '../../context/Docs/docContext';
-import io from 'socket.io-client';;
+import AuthContext from '../../context/Auth/authContext';
+import io from 'socket.io-client';
 
 let socket;
 
 const DocEditForm = () => {
     const docContext = useContext(DocContext);
+    const authContext = useContext(AuthContext);
     const { editDoc, docBody, loadingDocBody, loadDocBody } = docContext;
+    const { user } = authContext;
     const doc_id = JSON.parse(localStorage.getItem('current'))._id;
     
     const ENDPOINT = "http://localhost";
@@ -31,13 +34,13 @@ const DocEditForm = () => {
             });
         }
 
-        socket.on('textChangeClient', ( data ) => {
+        socket.on('textChangeClient', (data) => {
             console.log("hey i got data");
             console.log(data);
             setDoc({
                 text : data.text,
                 title: data.title
-            })
+            });
         });
      
     },[])
@@ -47,6 +50,8 @@ const DocEditForm = () => {
         title: ""
     });
 
+    const [ typing, setTyping ] = useState('');
+
     const { text, title } = doc;
 
     const onChange = (e) => {
@@ -54,7 +59,7 @@ const DocEditForm = () => {
             ...doc,
             [ e.target.name ]: e.target.value
         });
-        socket.emit( 'textChangeServer', doc );
+        socket.emit( 'textChangeServer', (doc) );
     };
 
     const onSubmit = (e) => {
@@ -81,6 +86,7 @@ const DocEditForm = () => {
                                 />
                             </div>
                             <h5><strong>Doc Body</strong></h5>
+                            <p className="grey-text">{typing}</p>
                             <div className="input-field col s12">
                                 <textarea 
                                 name="text" 

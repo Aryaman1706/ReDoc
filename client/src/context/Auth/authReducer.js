@@ -36,6 +36,7 @@ export default (state, action) => {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload,
+                loading: true,
                 docList: action.payload.docs
             };
         
