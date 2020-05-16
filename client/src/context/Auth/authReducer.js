@@ -8,7 +8,8 @@ import {
     LOAD_DOCS,
     SET_LOADING,
     REMOVE_DOCLIST,
-    EXCLUDE_DOC
+    EXCLUDE_DOC,
+    DOWNLOAD
 } from '../types';
 
 export default (state, action) => {
@@ -37,7 +38,7 @@ export default (state, action) => {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload,
-                loading: true,
+                loading: false,
                 docList: action.payload.docs
             };
         
@@ -92,6 +93,7 @@ export default (state, action) => {
             }
 
         case EXCLUDE_DOC:
+        case DOWNLOAD:
             return {
                 ...state
             }

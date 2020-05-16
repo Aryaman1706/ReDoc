@@ -4,6 +4,7 @@ const moment = require('moment');
 const fileUpload = require('express-fileupload');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const fs = require('fs');
 
 // importing models
 const { Doc }  = require('./models/docs');
@@ -68,6 +69,19 @@ app.post('/api/upload',authM, async(req,res)=>{
       res.json(doc);
 });
 // --->
+
+// download the file -->
+app.get('/api/download/:id', authM, async(req, res)=>{
+  const doc = await Doc.findById(req.params.id);
+  if(!doc){
+    res.send("No doc found");
+  } else{
+    var readStream = fs.createReadStream( __dirname + '/client/public/' + doc.body );
+    readStream.pipe(res);
+  }
+});
+
+// -->
 
 //socket.io work -->
 io.on('connection', ( socket ) => {

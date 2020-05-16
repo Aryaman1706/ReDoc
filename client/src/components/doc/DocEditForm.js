@@ -9,7 +9,7 @@ const DocEditForm = () => {
     const docContext = useContext(DocContext);
     const authContext = useContext(AuthContext);
     const { editDoc, docBody, loadingDocBody, loadDocBody } = docContext;
-    const { user } = authContext;
+    const { user, download } = authContext;
     const doc_id = JSON.parse(localStorage.getItem('current'))._id;
     
     const ENDPOINT = "http://localhost";
@@ -66,6 +66,10 @@ const DocEditForm = () => {
         editDoc(doc);
     };
 
+    const onDownload = () => {
+        download(doc_id);
+    };
+
     return (
         <Fragment>
             <div className='container'>
@@ -102,6 +106,8 @@ const DocEditForm = () => {
                         className='btn blue'
                         />
                     </form>
+                    
+                    {/* <button className="btn green" style={{position:"absolute"}} onClick={onDownload} >Downlaod</button> */}
                 </div>  
             </div>
         </Fragment>

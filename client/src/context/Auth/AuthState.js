@@ -14,7 +14,8 @@ import {
     LOAD_DOCS,
     SET_LOADING,
     REMOVE_DOCLIST,
-    EXCLUDE_DOC
+    EXCLUDE_DOC,
+    DOWNLOAD
 } from '../types';
 
 const AuthState = (props) => {
@@ -74,12 +75,14 @@ const AuthState = (props) => {
 
     // load user
     const loadUser = async () => {
+        console.log("load user called");
         setAuthToken(localStorage.getItem('token'));
         const res = await axios.get('/api/user/me');
         dispatch({
             type: LOAD_USER,
             payload: res.data
-        })  
+        })
+        loadMyDocs();  
     };
 
     // update user
@@ -108,6 +111,7 @@ const AuthState = (props) => {
 
     // add doc
     const addDoc = async ( formData ) => {
+        console.log("add doc")
         const res = await axios.post('/api/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -122,6 +126,8 @@ const AuthState = (props) => {
 
     // load docs
     const loadMyDocs = async () => {
+        console.log("loadmydocs called");
+        console.log(state.docList);
         state.docList.forEach(
             async doc  => {
                 
@@ -173,6 +179,15 @@ const AuthState = (props) => {
         })
     }
 
+    // download file
+    const download = async( id ) => {
+        const res = await axios.get(`/api/download/${id}`);
+        console.log(res.data);
+        dispatch({
+            type: DOWNLOAD
+        })
+    }
+
     // return --->
     return (
         <AuthContext.Provider
@@ -191,7 +206,8 @@ const AuthState = (props) => {
                 updateUser,
                 addDoc,
                 loadMyDocs,
-                removeDoc
+                removeDoc,
+                download
             }}
         >
         { props.children }

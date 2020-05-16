@@ -12,6 +12,7 @@ import AuthState from './context/Auth/AuthState';
 import DocState from './context/Docs/DocState';
 
 import './App.css';
+import Common from './components/layouts/Common';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <DocState>
           <Router>
             <Fragment>
+            <Common />
               <Switch>
                 <Route exact path = '/login' component={Login} />
                 <Route exact path = '/signup' component={Signup} />

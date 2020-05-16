@@ -1,13 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/Auth/authContext';
+import { Link } from 'react-router-dom';
 
-const NavbarHome = (props) => {
+const Navbar = (props) => {
   const authContext = useContext(AuthContext);
   const { user, logoutUser, loadUser, loadMyDocs } = authContext;
-    useEffect(()=>{
-      loadUser();
-      // eslint-disable-next-line
-    },[localStorage.getItem('token')]);
 
   const onLogout = async() => {
     logoutUser();
@@ -18,15 +15,14 @@ const NavbarHome = (props) => {
           <div className="nav-wrapper">
             <a href="./" className="brand-logo">ReDoc</a>
             <ul className="right">
-              <li><a href="./profile">Hello {user && user.name}</a></li>
-              <li><a href="./add">Add</a></li>
-              <li><a href="./login" onClick={onLogout}>Logout</a></li>
+              <li><Link to="/profile">Hello {user && user.name}</Link></li>
+              <li><Link to="/add">Add</Link></li>
+              <li><Link to="/login" onClick={onLogout}>Logout</Link></li>
             </ul>
           </div>
         </nav>   
     )
 }
 
-export default NavbarHome
-
+export default Navbar
 

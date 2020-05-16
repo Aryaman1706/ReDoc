@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../context/Auth/authContext';
+import { Link } from 'react-router-dom';
 
 const DocItem = (props) => {
     const authContext = useContext(AuthContext);
@@ -17,12 +18,12 @@ const DocItem = (props) => {
             <div className='card-panel grey'>
                 <h4 className="white-text truncate">{title}</h4>
                 <p className="white-text">{date}</p>
-                <a 
+                <Link 
                     className='white-text btn blue'
-                    href='./doc' 
+                    to='./doc' 
                     onClick={onOpen}
                 >
-                Open</a>
+                Open</Link>
                 <a 
                     className='white-text btn red'
                     style={{marginLeft:"5px"}}

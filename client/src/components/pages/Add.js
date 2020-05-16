@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import AuthContext from '../../context/Auth/authContext';
 import Navbar from '../layouts/Navbar';
 import Spinner from '../layouts/Spinner';
@@ -19,11 +20,10 @@ const Add = (props) => {
   
     const onSubmit = async e => {
       if(file && title){
-        props.history.push('/');
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', title);
-
+        props.history.push('/');
         addDoc(formData);
       };
       e.preventDefault();
@@ -56,10 +56,10 @@ const Add = (props) => {
                 </div>
 
                 <div className='center'>
-                <input 
-                type='submit' 
-                className='btn blue'
-                />
+                  <input 
+                  type='submit' 
+                  className='btn blue'
+                  />
                 </div>
 
               </form>
@@ -70,6 +70,6 @@ const Add = (props) => {
   )
 }
 
-export default Add
+export default withRouter(Add)
 
 

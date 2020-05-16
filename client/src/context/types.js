@@ -13,3 +13,4 @@ export const LOAD_AUTHORS = 'LOAD_AUTHORS';
 export const DELETE_AUTHOR = 'DELETE_AUTHOR';
 export const ADD_AUTHOR = 'ADD_AUTHOR';
 export const EXCLUDE_DOC = 'EXCLUDE_DOC';
+export const DOWNLOAD = 'DOWNLOAD';

@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import Navbar from '../layouts/Navbar';
 import AuthContext from '../../context/Auth/authContext';
+import Navbar from '../layouts/Navbar'
 
 const Profile = (props) => {
 
@@ -20,7 +20,7 @@ const Profile = (props) => {
                 email: ""
             });
         }
-    },[ authContext ])
+    },[])
 
     const [ profile, setProfile ] = useState({
         name: "",
@@ -61,7 +61,6 @@ const Profile = (props) => {
                                 value={name}
                                 onChange={onChange}
                             />
-                            <label>Name</label>
                             </div>
 
                             <div className="input-field">
@@ -73,7 +72,6 @@ const Profile = (props) => {
                                 value={email}
                                 onChange={onChange}
                             />
-                            <label>Email</label>
                             </div>
 
                             <div className="input-field" style={{textAlign: "center", marginBottom:"0px"}}>
