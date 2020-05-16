@@ -12,3 +12,4 @@ export const EDIT_DOC = 'EDIT_DOC';
 export const LOAD_AUTHORS = 'LOAD_AUTHORS';
 export const DELETE_AUTHOR = 'DELETE_AUTHOR';
 export const ADD_AUTHOR = 'ADD_AUTHOR';
+export const EXCLUDE_DOC = 'EXCLUDE_DOC';

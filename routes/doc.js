@@ -28,6 +28,7 @@ router.get('/myDocs', auth, async(req,res)=>{
 // get a specific doc
 router.get('/:id', auth, async (req, res)=> {
   const doc = await Doc.findById(req.params.id);
+  if(!doc) { res.send("no doc found"); return }
   if( await isAuthorized( doc, req.user ) === true) {
     res.send(doc);
   } else{

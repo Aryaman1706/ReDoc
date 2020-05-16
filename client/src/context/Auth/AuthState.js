@@ -13,9 +13,9 @@ import {
     ADD_DOC,
     LOAD_DOCS,
     SET_LOADING,
-    REMOVE_DOCLIST
+    REMOVE_DOCLIST,
+    EXCLUDE_DOC
 } from '../types';
-import { sign } from 'jsonwebtoken';
 
 const AuthState = (props) => {
     
@@ -125,15 +125,16 @@ const AuthState = (props) => {
         state.docList.forEach(
             async doc  => {
                 
-                let res =  await axios.get(`/api/doc/${doc}`)
-                if(res.data){
+                let res =  await axios.get(`/api/doc/${doc}`);
+                if(res.data === "no doc found"){
+                   console.log(doc);
+                    excludeDoc(doc);
+                } 
+                else{
                     dispatch({
                         type: LOAD_DOCS,
                         payload: res.data
                     })
-                } else{
-                    console.log(doc);
-                    removeDoc(doc);
                 }
             }
         )
@@ -150,10 +151,24 @@ const AuthState = (props) => {
             }
         };
 
-        const res = await axios.put(`/api/user/editMyDocs/${doc}`, null ,config);
+        const res = await axios.put(`/api/doc/removeAuthor/${doc}`, { 'email': state.user.email } ,config);
         console.log(res.data);
         dispatch({
             type: REMOVE_DOCLIST,
+            payload: doc
+        })
+    }
+
+    // excludeDoc
+    const excludeDoc = async ( doc ) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const res = await axios.put(`api/user/editMyDocs/${doc}`, null, config);
+        dispatch({
+            type: EXCLUDE_DOC,
             payload: doc
         })
     }

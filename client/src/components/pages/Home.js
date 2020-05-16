@@ -7,7 +7,7 @@ import DocContainer from '../doc/DocContainer';
 const Home = (props) => {
     
     const authContext = useContext(AuthContext);
-    const { user, docList, loadMyDocs, docLoading } = authContext;
+    const { loadUser, loadMyDocs, docLoading } = authContext;
     
     useEffect(()=>{
         loadMyDocs();

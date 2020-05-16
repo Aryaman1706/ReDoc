@@ -56,11 +56,12 @@ router.delete('/me', auth, async(req,res)=>{
 
 // delete the doc id from my docs
 router.put('/editMyDocs/:id', auth, async(req,res)=>{
-    const length = req.user.docs.length;
+    
     let user = await User.findById(req.user._id);
+    const length = user.docs.length;
     var i;
     for(i=0; i<length; i++){
-        if(user.docs[i]._id == req.params.id){
+        if(user.docs[i]._id.equals(req.params.id)){
             user.docs.splice(i,1);
             user = await user.save();
             res.send(user);

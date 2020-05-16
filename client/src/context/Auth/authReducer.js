@@ -7,7 +7,8 @@ import {
     ADD_DOC,
     LOAD_DOCS,
     SET_LOADING,
-    REMOVE_DOCLIST
+    REMOVE_DOCLIST,
+    EXCLUDE_DOC
 } from '../types';
 
 export default (state, action) => {
@@ -64,8 +65,8 @@ export default (state, action) => {
         case ADD_DOC:
             return{
                 ...state,
-                docList: [ action.payload._id, ...state.docList ]
-                // docs: [ action.payload, ...state.docs]
+                docList: [ action.payload._id, ...state.docList ],
+                docs: [ action.payload, ...state.docs]
             };
 
         //load my docs
@@ -83,11 +84,16 @@ export default (state, action) => {
             }
             
         case REMOVE_DOCLIST:
-            return {
+            return{
                 ...state,
                 docs: state.docs.filter(
                     x => x._id !== action.payload
                 )
+            }
+
+        case EXCLUDE_DOC:
+            return {
+                ...state
             }
             
         default:
