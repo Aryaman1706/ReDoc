@@ -37,10 +37,11 @@ export default (state, action) => {
         case LOAD_USER:
             return {
                 ...state,
+                docList: action.payload.docs,
                 isAuthenticated: true,
                 user: action.payload,
                 loading: false,
-                docList: action.payload.docs
+                
             };
         
         // update user
@@ -56,11 +57,14 @@ export default (state, action) => {
             localStorage.removeItem('token');
             return {
                 ...state,
-                isAuthenticated: false,
+                isAuthenticated: null,
                 token: null,
                 user: null,
-                docList: null,
-                docs: null
+                docList: [],
+                docs: [],
+                loading: true,
+                docLoading: true
+
             };
 
         // add doc

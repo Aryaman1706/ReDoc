@@ -3,13 +3,20 @@ import AuthContext from '../../context/Auth/authContext';
 
 const Common = () => {
     const authContext = useContext(AuthContext);
-    const { user, logoutUser, loadUser, loadMyDocs, loading } = authContext;
+    const { user, docList, loadUser, loadMyDocs, loading, isAuthenticated } = authContext;
 
     useEffect(()=>{
-        console.log("use effect in nabar home");
+        console.log("use effec for load user")
         loadUser();
         // eslint-disable-next-line
-    },[]);
+    },[isAuthenticated]);
+
+    useEffect(()=>{
+        console.log("use effect in common");
+        console.log(loading, docList)
+        console.log(user)
+        loadMyDocs();
+    },[loading])
 
     return (
         <div></div>
