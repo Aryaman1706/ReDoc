@@ -45,7 +45,7 @@ router.put('/me', auth, async (req,res)=>{
         email: req.body.email
     }, { new: true });
 
-    res.json(user);
+    res.send(user);
 });
 
 // delete account

@@ -47,7 +47,7 @@ export default (state, action) => {
         case UPDATE_USER:
             return {
                 ...state,
-                ...action.payload,
+                user: action.payload,
                 isAuthenticated: true
             };
         

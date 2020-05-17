@@ -96,8 +96,7 @@ const AuthState = (props) => {
             }
         };
 
-        const res = axios.put(`/api/user/me`, formData, config);
-
+        const res = await axios.put(`/api/user/me`, formData, config);
         dispatch({
             type: UPDATE_USER,
             payload: res.data
