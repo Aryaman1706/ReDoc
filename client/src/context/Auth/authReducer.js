@@ -9,7 +9,8 @@ import {
     SET_LOADING,
     REMOVE_DOCLIST,
     EXCLUDE_DOC,
-    DOWNLOAD
+    DOWNLOAD,
+    DELETE_DOC
 } from '../types';
 
 export default (state, action) => {
@@ -85,6 +86,7 @@ export default (state, action) => {
             }
             
         case REMOVE_DOCLIST:
+        case DELETE_DOC:
             return{
                 ...state,
                 docs: state.docs.filter(

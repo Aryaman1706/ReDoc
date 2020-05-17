@@ -14,7 +14,7 @@ const Doc = () => {
     
     return (
         <Fragment>
-            <Navbar/>
+            <Navbar />
             { loadingDocBody === false ?
                 <Fragment>
                     <AuthorsContainer/>

@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import AuthContext from '../../context/Auth/authContext';
 import Navbar from '../layouts/Navbar'
+import { Link } from 'react-router-dom';
 
 const Profile = (props) => {
 
@@ -44,7 +45,7 @@ const Profile = (props) => {
 
     return (
         <Fragment>
-            <Navbar />
+            <Navbar/>
                 <div className="valign-wrapper" style={{height:"80%", width: "100%", position:"absolute"}}>
                     <div className="container">
                         <h1 className="center-align">Profile</h1>

@@ -1,0 +1,5 @@
+test file
+xyz rupees 12 
+abc rs 17
+zxc rs 20 
+fgh rs 1000

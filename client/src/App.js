@@ -17,7 +17,7 @@ import Common from './components/layouts/Common';
 const App = () => {
   return (
     <AuthState>
-      <DocState>
+      
           <Router>
             <Fragment>
             <Common />
@@ -25,13 +25,15 @@ const App = () => {
                 <Route exact path = '/login' component={Login} />
                 <Route exact path = '/signup' component={Signup} />
                 <PrivateRoute exact path = '/' component={Home} />
-                <Route exact path = '/profile' component={Profile} />
-                <Route exact path = '/add' component={Add} />
+                <PrivateRoute exact path = '/profile' component={Profile} />
+                <PrivateRoute exact path = '/add' component={Add} />
+                <DocState>
                 <Route exact path = '/doc' component={Doc} />
+                </DocState>
               </Switch>
             </Fragment>
           </Router>
-        </DocState>
+        
     </AuthState>
   )
 }

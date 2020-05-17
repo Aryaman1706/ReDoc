@@ -20,7 +20,7 @@ const DocItem = (props) => {
                 <p className="white-text">{date}</p>
                 <Link 
                     className='white-text btn blue'
-                    to='./doc' 
+                    to='/doc' 
                     onClick={onOpen}
                 >
                 Open</Link>

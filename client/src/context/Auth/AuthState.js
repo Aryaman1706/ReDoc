@@ -15,7 +15,9 @@ import {
     SET_LOADING,
     REMOVE_DOCLIST,
     EXCLUDE_DOC,
-    DOWNLOAD
+    DOWNLOAD,
+    DELETE_AUTHOR,
+    DELETE_DOC
 } from '../types';
 
 const AuthState = (props) => {
@@ -156,13 +158,15 @@ const AuthState = (props) => {
                 'Content-Type': 'application/json'
             }
         };
-
         const res = await axios.put(`/api/doc/removeAuthor/${doc}`, { 'email': state.user.email } ,config);
-        console.log(res.data);
-        dispatch({
-            type: REMOVE_DOCLIST,
-            payload: doc
-        })
+        if(res.data === "delete"){
+            deleteDoc (doc);
+        } else{
+            dispatch({
+                type: REMOVE_DOCLIST,
+                payload: doc
+            })
+        }
     }
 
     // excludeDoc
@@ -185,6 +189,15 @@ const AuthState = (props) => {
         console.log(res.data);
         dispatch({
             type: DOWNLOAD
+        })
+    }
+
+    // delete doc
+    const deleteDoc = async (doc) => {
+        const res = await axios.delete(`/api/doc/${doc}`);
+        dispatch({
+            type: DELETE_DOC,
+            payload: doc
         })
     }
 

@@ -13,7 +13,7 @@ const NavbarHome = (props) => {
     return (
         <nav  className="nav-extended" style={{backgroundColor: 'blue'}}>
           <div className="nav-wrapper">
-            <a href="./" className="brand-logo">ReDoc</a>
+            <Link to="/" className="brand-logo">ReDoc</Link>
             <ul className="right">
               <li><Link to='/profile'>Hey {user && user.name}</Link></li>
               <li><Link to="/add">Add</Link></li>

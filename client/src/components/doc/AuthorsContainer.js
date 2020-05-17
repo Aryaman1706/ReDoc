@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect, Fragment } from 'react';
 import DocContext from '../../context/Docs/docContext';
 import AuthorsItem from './AuthorsItem'
 import Spinner from '../layouts/Spinner';
-import { set } from 'mongoose';
 
 const AuthorsContainer = () => {
     const docContext = useContext(DocContext);
-    const { loadAuthors, authors, loadingAuthors, addAuthor } = docContext;
+    const { loadAuthors, authors, loadingAuthors, addAuthor, authorsList } = docContext;
     
     useEffect(()=>{
+        console.log("use effect in authors")
         loadAuthors();
     },[]);
 

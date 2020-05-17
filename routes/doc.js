@@ -112,6 +112,12 @@ router.put('/addAuthor/:id', auth, async(req,res)=>{
 router.put( '/removeAuthor/:id', auth, async(req,res)=>{
   let doc = await Doc.findById ( req.params.id );
   if( await isAuthorized ( doc, req.user ) === true ) {
+    
+    if( doc.authors.length === 1 ){
+      res.send("delete");
+      return;
+    };
+
     let user = await User.findOne({email: req.body.email});
     if(!user){
       res.send("No user in db");
