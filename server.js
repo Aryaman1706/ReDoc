@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const config = require('config')
 
 // importing models
 const { Doc }  = require('./models/docs');
@@ -106,8 +107,18 @@ io.on('connection', ( socket ) => {
 });
 // socket.io work done -->
 
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}s
+
 // mongoose and port setup-->
-mongoose.connect('mongodb+srv://aryaman:aryaman@cluster0-gepgv.mongodb.net/test?retryWrites=true&w=majority')
+mongoose.connect(config.get('mongoURI'))
 .then(()=> console.log('Connected to MongoDB...'))
 .catch(err=> console.error('Not Connected...'));
 

@@ -1,0 +1,4 @@
+{
+    "mongoURI": "'mongodb+srv://aryaman:aryaman@cluster0-gepgv.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "professor"
+}
