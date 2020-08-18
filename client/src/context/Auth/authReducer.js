@@ -1,110 +1,104 @@
 import {
-    REGISTER_USER,
-    LOGIN_USER,
-    LOAD_USER,
-    LOGOUT_USER,
-    UPDATE_USER,
-    ADD_DOC,
-    LOAD_DOCS,
-    SET_LOADING,
-    REMOVE_DOCLIST,
-    EXCLUDE_DOC,
-    DOWNLOAD,
-    DELETE_DOC
-} from '../types';
+  REGISTER_USER,
+  LOGIN_USER,
+  LOAD_USER,
+  LOGOUT_USER,
+  UPDATE_USER,
+  ADD_DOC,
+  LOAD_DOCS,
+  SET_LOADING,
+  REMOVE_DOCLIST,
+  EXCLUDE_DOC,
+  DOWNLOAD,
+  DELETE_DOC,
+} from "../types";
 
 export default (state, action) => {
+  switch (action.type) {
+    // register user
+    case REGISTER_USER:
+      return {
+        ...state,
+        ...action.payload,
+      };
 
-    switch(action.type) {
-        
-        // register user
-        case REGISTER_USER:
-            return {
-                ...state,
-                ...action.payload
-            };
-        
-        // login user
-        case LOGIN_USER:
-            localStorage.setItem('token', action.payload.token);
-            return {
-                ...state,
-                ...action.payload,
-                isAuthenticated: true
-            };
+    // login user
+    case LOGIN_USER:
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+      };
 
-        // load user
-        case LOAD_USER:
-            return {
-                ...state,
-                docList: action.payload.docs,
-                isAuthenticated: true,
-                user: action.payload,
-                loading: false,
-                
-            };
-        
-        // update user
-        case UPDATE_USER:
-            return {
-                ...state,
-                user: action.payload,
-                isAuthenticated: true
-            };
-        
-        // logout user
-        case LOGOUT_USER:
-            localStorage.removeItem('token');
-            return {
-                ...state,
-                isAuthenticated: null,
-                token: null,
-                user: null,
-                docList: [],
-                docs: [],
-                loading: true,
-                docLoading: true
+    // load user
+    case LOAD_USER:
+      return {
+        ...state,
+        docList: action.payload.docs,
+        isAuthenticated: true,
+        user: action.payload,
+        loading: false,
+      };
 
-            };
+    // update user
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+      };
 
-        // add doc
-        case ADD_DOC:
-            return{
-                ...state,
-                docList: [ action.payload._id, ...state.docList ],
-                docs: [ action.payload, ...state.docs]
-            };
+    // logout user
+    case LOGOUT_USER:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        isAuthenticated: null,
+        token: null,
+        user: null,
+        docList: [],
+        docs: [],
+        loading: true,
+        docLoading: true,
+      };
 
-        //load my docs
-        case LOAD_DOCS:
-            return{
-                ...state,
-                docs: [ action.payload, ...state.docs ]
-            }
+    // add doc
+    case ADD_DOC:
+      return {
+        ...state,
+        docList: [action.payload._id, ...state.docList],
+        docs: [action.payload, ...state.docs],
+      };
 
-        // set loading
-        case SET_LOADING:
-            return{
-                ...state,
-                docLoading: false
-            }
-            
-        case REMOVE_DOCLIST:
-        case DELETE_DOC:
-            return{
-                ...state,
-                docs: state.docs.filter(
-                    x => x._id !== action.payload
-                )
-            }
+    //load my docs
+    case LOAD_DOCS:
+      return {
+        ...state,
+        docs: [action.payload, ...state.docs],
+      };
 
-        case EXCLUDE_DOC:
-        case DOWNLOAD:
-            return {
-                ...state
-            }
-            
-        default:
-            return state;
-    }
+    // set loading
+    case SET_LOADING:
+      return {
+        ...state,
+        docLoading: false,
+      };
+
+    case REMOVE_DOCLIST:
+    case DELETE_DOC:
+      return {
+        ...state,
+        docs: state.docs.filter((x) => x._id !== action.payload),
+      };
+
+    case EXCLUDE_DOC:
+    case DOWNLOAD:
+      return {
+        ...state,
+      };
+
+    default:
+      return state;
+  }
 };

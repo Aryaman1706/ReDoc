@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "format": "prettier --write \"*/**/*.{js,jsx}\"",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
@@ -22,11 +23,15 @@
   },
   "homepage": "https://github.com/Aryaman1706/docEditor#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.9",
+    "html-to-docx": "^1.1.29",
     "joi": "^14.3.1",
     "json-web-token": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
+    "mammoth": "^1.4.11",
     "moment": "^2.25.3",
     "mongoose": "^5.9.11",
     "multer": "^1.4.2",
@@ -35,6 +40,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.5"
   }
 }
