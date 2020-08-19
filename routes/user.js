@@ -51,7 +51,13 @@ const router = express.Router();
 // * Done
 router.get("/me", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("docs").exec();
+    const user = await User.findById(req.user._id)
+      .populate({
+        path: "docs",
+        model: "Doc",
+        options: { sort: { dateOrg: -1 } },
+      })
+      .exec();
     if (!user) return res.status(404).send("user not found");
     res.status(200).json(user);
   } catch (error) {
@@ -125,10 +131,18 @@ router.post("/create_doc", async (req, res) => {
 
     const doc = await Doc.create({
       title: req.body.title.trim(),
-      body: fileName,
+      body: `${fileName}.html`,
     });
 
-    res.send(doc);
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $push: { docs: doc._id },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ doc, user });
   } catch (error) {
     console.log(error);
     res.status(400).send("Something went wrong.");
@@ -167,7 +181,7 @@ router.post("/upload_doc", [auth, uploadDoc], async (req, res) => {
 
     const doc = await Doc.create({
       title: req.body.title.trim(),
-      body: htmlFileName,
+      body: `${htmlFileName}.html`,
       authors: req.user._id,
     });
 
