@@ -1,6 +1,7 @@
+// * TRY TO MAKE AS MANY OPERATIONS ASYNC AS POSSIBLE.
+
 const express = require("express");
 const mongoose = require("mongoose");
-const HTMLtoDOCX = require("html-to-docx");
 const fs = require("fs");
 // importing routes
 const user = require("./routes/user");
@@ -44,25 +45,6 @@ io.on("connection", (socket) => {
   });
 });
 // socket.io work done -->
-
-app.get("/get", async (req, res) => {
-  var htmlCode = `
-    <h1>This is heading 1</h1>
-    <h2>This is heading 2</h2>
-    <h3>This is heading 3</h3>
-    <h6>This is heading 6</h6>
-    <p> <strong> Strong </strong> </p>
-    <ol>
-      <li>List item 1</li>
-      <li>List item 2</li>
-      <li>List item 3</li>
-      <li>List item 4</li>
-    </ol>
-  `;
-  const result = await HTMLtoDOCX(htmlCode);
-  fs.writeFileSync("./example.docx", result);
-  res.send("done");
-});
 
 // mongoose and port setup-->
 mongoose
