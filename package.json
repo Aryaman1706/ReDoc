@@ -30,7 +30,7 @@
     "html-to-docx": "^1.1.29",
     "joi": "^14.3.1",
     "json-web-token": "^3.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mammoth": "^1.4.11",
     "moment": "^2.25.3",
     "mongoose": "^5.9.11",
